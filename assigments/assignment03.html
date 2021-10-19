@@ -7,6 +7,11 @@ th, td {text-align: center;}
 .btn-danger{
   background-color:  #f44336
 }
+  
+.btn-zero{
+  background-color: yellow;
+}
+  
 .table-striped tr:nth-child(odd) {
   background-color: #D3D3D3;
 }
@@ -169,15 +174,21 @@ let elem = [];
 // elem[1].children[4].children[0].onclick = function(){add1(elem[1]);};
 
 for(let i=1; i<=18; i++) {
-  // console.log(i);
+  console.log(i);
   elem[i] = document.getElementById(i.toString());
+  //creates zero buttons
+  let btn = document.createElement("button");
+  btn.classList.add("btn-zero");
+  let text = document.createTextNode("0");
+  btn.appendChild(text);
+  elem[i].children[4].appendChild(btn);
+  console.log(elem[i].children[4].length)
+  //add1
   elem[i].children[4].children[0].onclick = function(){add1(elem[i]);};
   //sub1
   elem[i].children[4].children[1].onclick = function(){sub1(elem[i]);};
-  
-  
-  
-  
+  //zero
+  elem[i].children[4].children[2].onclick = function(){zero(elem[i]);};
 }
 
 // create an "add1" function
@@ -201,6 +212,12 @@ function sub1 (elem) {
     currentScore = Number.parseInt(currentScore);
     elem.children[2].innerHTML = currentScore - 1;
   }
+  update(elem);
+}
+
+function zero (elem) {
+  elem.children[2].innerHTML = "-";
+  elem.children[3].innerHTML = "-";
   update(elem);
 }
 

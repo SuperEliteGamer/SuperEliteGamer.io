@@ -1,6 +1,15 @@
 <style>
   /* center-align table columns */
-th, td {text-align: center;}
+th, td {text-align: center;} 
+.btn-success{
+  background-color: #4CAF50;
+}
+.btn-danger{
+  background-color:  #f44336
+}
+.table-striped tr:nth-child(odd) {
+  background-color: #D3D3D3;
+}
 </style>
 <body>
 <h1>Golf Scorecard</h1>
@@ -147,7 +156,7 @@ th, td {text-align: center;}
   </tr>
 </table>
   <script>
-    let elem = [];
+let elem = [];
 // assign the entire table row for hole 1 to a variable, elem
 // elem[1] = document.getElementById("1");
 
@@ -163,6 +172,8 @@ for(let i=1; i<=18; i++) {
   // console.log(i);
   elem[i] = document.getElementById(i.toString());
   elem[i].children[4].children[0].onclick = function(){add1(elem[i]);};
+  //sub1
+  elem[i].children[4].children[1].onclick = function(){sub1(elem[i]);};
 }
 
 // create an "add1" function
@@ -174,6 +185,20 @@ function add1 (elem) {
     currentScore = Number.parseInt(currentScore);
     elem.children[2].innerHTML = currentScore + 1;
   }
+  update(elem);
 }
+
+//sub1
+function sub1 (elem) {
+  if(elem.children[2].innerHTML == "-") 
+    elem.children[2].innerHTML = "-1";
+  else {
+    let currentScore = elem.children[2].innerHTML;
+    currentScore = Number.parseInt(currentScore);
+    elem.children[2].innerHTML = currentScore - 1;
+  }
+  update(elem);
+}
+
   </script>
 </body>

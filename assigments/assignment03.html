@@ -174,6 +174,10 @@ for(let i=1; i<=18; i++) {
   elem[i].children[4].children[0].onclick = function(){add1(elem[i]);};
   //sub1
   elem[i].children[4].children[1].onclick = function(){sub1(elem[i]);};
+  
+  
+  
+  
 }
 
 // create an "add1" function
@@ -200,5 +204,27 @@ function sub1 (elem) {
   update(elem);
 }
 
-  </script>
+//called in add1 and sub1
+function update (elemi){
+  //code for over
+  if(elemi.children[2].innerHTML != "-"){
+    let over = elemi.children[2].innerHTML-elemi.children[1].innerHTML;
+    elemi.children[3].innerHTML = over;
+      }  
+  //code for TOTALS
+  let parSum = 0;
+  let scoreSum = 0;
+  let overSum = 0;
+  for(let i=1; i<=18; i++){
+    parSum += Number.parseInt(elem[i].children[1].innerHTML);
+    if(elem[i].children[2].innerHTML != "-")
+      {
+        scoreSum += Number.parseInt(elem[i].children[2].innerHTML);
+        overSum += Number.parseInt(elem[i].children[3].innerHTML);
+      }
+  }
+  document.getElementById("parTotal").innerHTML = parSum;
+  document.getElementById("scoreTotal").innerHTML = scoreSum;
+  document.getElementById("overTotal").innerHTML = overSum;
+}
 </body>

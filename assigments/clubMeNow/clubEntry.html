@@ -52,13 +52,13 @@
 	
 	function addClub() {
         // your code here
-	newClubName = document.getElementById("clubName").innerHTML;
+	newClubName = document.getElementById("clubName").value;
 		
 	let found = false;
 	for(let x = 0; x < clubs.length; x++){
 		if(clubs[x][3] == newClubName){
 			newClubDistances = clubs[x];
-			clubs[clubs.length+1] = newClubDistances;
+			clubs[clubs.length] = newClubDistances;
 		}
 	}
 	}

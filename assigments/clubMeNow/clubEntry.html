@@ -56,7 +56,7 @@
 		
 	let found = false;
 	for(let x = 0; x < clubs.length; x++){
-		if(clubs[x][3] == newClubName){
+		if(clubs[x][2] == newClubName){
 			newClubDistances = clubs[x];
 			clubs[clubs.length] = newClubDistances;
 			let str = JSON.stringify(clubs);

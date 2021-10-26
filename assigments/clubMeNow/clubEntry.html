@@ -59,6 +59,8 @@
 		if(clubs[x][3] == newClubName){
 			newClubDistances = clubs[x];
 			clubs[clubs.length] = newClubDistances;
+			let str = JSON.stringify(clubs);
+			localStorage.setItem("clubs", str);
 		}
 	}
 	}

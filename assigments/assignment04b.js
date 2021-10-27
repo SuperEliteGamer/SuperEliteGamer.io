@@ -192,8 +192,8 @@ let formArray = [
 // Step 3. loop through the JS object array to populate the form
 
 // your code here
-for(let member in formArray){
-  addTextBox(table5B, member[0], member[1], member[2], member[3], member[4]);
+for(let x = 0; x < formArray.length; x++){
+addTextBox(table5B, formArray[x].label, formArray[x].inputType, formArray[x].id, formArray[x].onkeyup, formArray[x].errorId);
 }
 
 // append to tableobj a 3-column table row 

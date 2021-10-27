@@ -277,7 +277,7 @@ function addTextBox(tableobj, label, inputType, id, onkeyup, errorId){
   let error = document.createElement("td");
   let errorDiv = document.createElement("div");
   //input
-  input.setAttribute("label": label)
+  //input.setAttribute("label": label)
   input.setAttribute("inputType": inputType)
   input.setAttribute("id": id)
   input.setAttribute("onekeyup": onkeyup)

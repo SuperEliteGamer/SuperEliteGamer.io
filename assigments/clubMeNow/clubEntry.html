@@ -53,16 +53,8 @@
 	function addClub() {
         // your code here
 	newClubName = document.getElementById("clubName").value;
-		
-	let found = false;
-	for(let x = 0; x < clubs.length; x++){
-		if(clubs[x][2] == newClubName){
-			newClubDistances = clubs[x];
-			clubs[clubs.length] = newClubDistances;
-			let str = JSON.stringify(clubs);
-			localStorage.setItem("clubs", clubs);
-		}
-	}
+	newClubDistanaces = "[1599, " + newClubName + ", " + newClubName + ",   0, 0, 0, 0, 0,   0,   0]";
+	clubs[clubs.length] = newClubDistances;
 	}
 	
 	// navigate to club distance LIST screen

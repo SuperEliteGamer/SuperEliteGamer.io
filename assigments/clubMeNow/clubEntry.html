@@ -53,10 +53,11 @@
 	function addClub() {
         // your code here
 	newClubName = document.getElementById("clubName").value;
-	newClubDistanaces = "[0, " + newClubName + ", " + newClubName + ",   0, 0, 0, 0, 0,   0,   0]";
+	newClubDistanaces = [0,0,0,0,0,0,0,0,0,0];
+	newClubDistances[3] = newClubName;
+	clubs[clubs.length] = newClubDistances;
+	
 	let str = JSON.stringify(clubs);
-	str = str.slice(0,-1) + newClubDistances + "]";
-		
 	localStorage.setItem("clubs", str);
 	}
 	

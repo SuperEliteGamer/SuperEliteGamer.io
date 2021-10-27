@@ -281,7 +281,6 @@ function addTextBox(tableobj, label, inputType, id, onkeyup, errorId){
   input.setAttribute("inputType", inputType)
   input.setAttribute("id", id)
   input.setAttribute("onekeyup", onkeyup)
-  input.setAttribute("errorID", errorId)
   //errorDiv
   errorDiv.setAttribute("id", errorId)
   

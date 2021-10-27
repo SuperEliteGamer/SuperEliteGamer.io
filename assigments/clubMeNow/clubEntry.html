@@ -54,7 +54,9 @@
         // your code here
 	newClubName = document.getElementById("clubName").value;
 	newClubDistanaces = "[1599, " + newClubName + ", " + newClubName + ",   0, 0, 0, 0, 0,   0,   0]";
-	clubs[clubs.length] = newClubDistances;
+	clubs[clubs.length] = newClubDistances
+	let str = JSON.stringify(clubs);
+	localStorage.setItem("clubs", str);
 	}
 	
 	// navigate to club distance LIST screen

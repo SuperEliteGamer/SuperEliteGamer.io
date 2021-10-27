@@ -54,8 +54,8 @@
         // your code here
 	newClubName = document.getElementById("clubName").value;
 	newClubDistanaces = [0,0,0,0,0,0,0,0,0,0];
-	newClubDistances[3] = newClubName;
-	clubs[clubs.length] = newClubDistances;
+	newClubDistances[clubRow] = newClubName;
+	clubs.push(newClubDistances);
 	
 	let str = JSON.stringify(clubs);
 	localStorage.setItem("clubs", str);

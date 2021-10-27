@@ -273,13 +273,15 @@ function createTable(id) {
 function addTextBox(tableobj, label, inputType, id, onkeyup, errorId){
   let tr = document.createElement("tr");
   let box = document.createElement("td");
+  let label1 = document.createElement("td");
   let input = document.createElement("input");
   let error = document.createElement("td");
   let errorDiv = document.createElement("div");
   //input
-  input.setAttribute("label", label)
-  input.setAttribute("inputType", inputType)
+  let labeltext = document.createTextNode(label);
+  input.setAttribute("inputtype", inputType)
   input.setAttribute("id", id)
+  console.log(typeof(onkeyup))
   input.setAttribute("onekeyup", onkeyup)
   //errorDiv
   errorDiv.setAttribute("id", errorId)
@@ -287,13 +289,14 @@ function addTextBox(tableobj, label, inputType, id, onkeyup, errorId){
   
   box.appendChild(input);
   error.appendChild(errorDiv)
+  label1.appendChild(labeltext);
+  tr.appendChild(label1);
   tr.appendChild(box);
   tr.appendChild(error);
   
   tableobj.children[0].appendChild(tr);
   
 }
-
 
 /*
 let fieldLabel, fieldEntry, fieldError;

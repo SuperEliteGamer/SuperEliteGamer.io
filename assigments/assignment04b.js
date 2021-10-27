@@ -192,7 +192,7 @@ let formArray = [
 // Step 3. loop through the JS object array to populate the form
 
 // your code here
-for(let member : formArray){
+for(let member in formArray){
   addTextBox(table5B, member.label, member.inputType, member.id, member.onkyup, member.errorId);
 }
 

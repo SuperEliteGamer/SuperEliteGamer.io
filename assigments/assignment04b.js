@@ -193,7 +193,7 @@ let formArray = [
 
 // your code here
 for(let member in formArray){
-  addTextBox(table5B, member.label, member.inputType, member.id, member.onkyup, member.errorId);
+  addTextBox(table5B, member[0], member[1], member[2], member[3], member[4]);
 }
 
 // append to tableobj a 3-column table row 

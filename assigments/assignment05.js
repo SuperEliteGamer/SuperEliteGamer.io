@@ -261,6 +261,3 @@ function useNewArray(){
     })
     
   }
- 
-  
-}

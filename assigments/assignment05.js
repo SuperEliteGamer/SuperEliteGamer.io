@@ -43,7 +43,7 @@ var chartData = {
           // logarithmic scale ignores maxTicksLimit
           maxTicksLimit: 11,
           callback: function(label, index, labels) {
-            return (label/1000000 == 1 || label/1000000 == 0.1 || label/1000000 == 0.01)? label/1000+'k' :  "";
+            return (label/1000000 == 100 |label/1000000 == 10 |label/1000000 == 1 || label/1000000 == 0.1 || label/1000000 == 0.01)? label/1000+'k' :  "";
           }
         },
         scaleLabel: {
@@ -263,7 +263,9 @@ function useNewArray(){
   
   
   chartData.data.datasets[0].data = newArray.map(x => x.TotalConfirmed)
+  chartData.data.datasets[0].label = "Total Cases"
   chartData.data.datasets[1].data = newArray.map(x => x.TotalDeaths)
+  chartData.data.datasets[1].label = "Total Deaths"
   chartData.data.datasets.push({
       label: 'TotalConfirmedPer100000',
       data: newArray.map(x => x.TotalConfirmedPer100000()),

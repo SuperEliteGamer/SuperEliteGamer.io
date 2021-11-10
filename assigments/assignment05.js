@@ -43,7 +43,7 @@ var chartData = {
           // logarithmic scale ignores maxTicksLimit
           maxTicksLimit: 11,
           callback: function(label, index, labels) {
-            return (label/1000 == 1 || label/1000 == 0.1 || label/1000 == 0.01)? label/1000+'k' :  "";
+            return (label/1000000 == 1 || label/1000000 == 0.1 || label/1000000 == 0.01)? label/1000+'k' :  "";
           }
         },
         scaleLabel: {

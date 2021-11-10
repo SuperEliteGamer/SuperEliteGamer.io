@@ -84,7 +84,7 @@ function loadContent() {
       
       //place in local storage
       localStorage.removeItem("date");
-      localStorage.setItem("data", covidJson);
+      localStorage.setItem("date", new Date().getDate());
       
       localStorage.removeItem("data");
       localStorage.setItem("data", covidJson);

@@ -135,7 +135,7 @@ function loadContent() {
   }
   else{
     //runs the function stored
-    xhttp.onreadystatechange;
+    xhttp.onreadystatechange();
   }
   
 } // end function loadContent() 

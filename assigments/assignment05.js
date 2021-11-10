@@ -80,8 +80,6 @@ function loadContent() {
       covidJson = this.responseText;
       covidJsObj = JSON.parse(covidJson);
       newConfirmedOver1000 = [];
-      //fills array
-      fillNewArray();
       
 	    for (let c of covidJsObj.Countries) {
         if (c.NewConfirmed > 5000) {
@@ -121,6 +119,9 @@ function loadContent() {
   
   xhttp.open("GET", URL, true);
   xhttp.send();
+  
+  //fills array
+  useNewArray();
   
 } // end function loadContent() 
 
@@ -234,15 +235,32 @@ var populations = {
 // push all info i need
 var newArray = []
 
-function fillNewArray(){
+function useNewArray(){
   for (let i=0; i<covidJsObj.Countries.length; i++) {
     newArray.push({
       "Slug": "\"" + covidJsObj.Countries[i].Slug + "\"",
       "TotalConfirmed": covidJsObj.Countries[i].TotalConfirmed,
       // continue here...
+      "TotalDeaths": covidJsObj.Countries[i].TotalDeaths,
       "Population" : populations[covidJsObj.Countries[i].Slug],
-      "TotalConfirmedPer100000" : this.TotalConfirmed/(this.Population/100000)
+      TotalConfirmedPer100000 : function () {return this.TotalConfirmed/(this.Population/100000)}
     })
 
   }
+  
+ newArray = newArray.filter(x => x.TotalConfirmed > 50000)
+ newArray =  _.orderBy(newArray,x => x.TotalConfirmedPer100000(),'desc')
+  
+  
+  chartData.data.datasets[0] = newArray.map(x => x.TotalConfirmed)
+  chartData.data.datasets[1] = newArray.map(x => x.TotalDeaths)
+  chartData.data.datasets.push({
+      label: 'TotalConfirmedPer100000',
+      data: newArray.map(x => x.TotalConfirmedPer100000()),
+      backgroundColor: "rgba(0,0,255,0.4)"
+    })
+    
+  }
+ 
+  
 }

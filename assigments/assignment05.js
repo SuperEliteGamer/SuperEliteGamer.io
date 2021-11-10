@@ -71,15 +71,23 @@ var chartData = {
 // https://www.w3schools.com/js/js_ajax_intro.asp
 
 function loadContent() {
+  let hasGoodData = localStorage.getItem("date") != new Date().getDate();
   
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 
-        && this.status == 200) {
+    if ((this.readyState == 4 
+        && this.status == 200) || hasGoodData) {
       
-      covidJson = this.responseText;
+      covidJson = ((hasGoodData)? localStorage.getItem("data", covidJson) :  this.responseText)
       covidJsObj = JSON.parse(covidJson);
       newConfirmedOver1000 = [];
+      
+      //place in local storage
+      localStorage.removeItem("date");
+      localStorage.setItem("data", covidJson);
+      
+      localStorage.removeItem("data");
+      localStorage.setItem("data", covidJson);
       
 	    for (let c of covidJsObj.Countries) {
         if (c.NewConfirmed > 5000) {
@@ -112,16 +120,23 @@ function loadContent() {
       chartData.options.title.text 
         = "Covid 19 Hotspots as of "  + dayjs().format("MMMM D, YYYY");
       myChart = new Chart(ctx, chartData); 
+      
+        //fills array
+      useNewArray();
 
     } // end if
     
   }; // end xhttp.onreadystatechange = function()
   
-  xhttp.open("GET", URL, true);
-  xhttp.send();
-  
-  //fills array
-  useNewArray();
+  //will call if data wasn't called today
+  if(!hasGoodData){
+    xhttp.open("GET", URL, true);
+    xhttp.send();
+  }
+  else{
+    //runs the function stored
+    xhttp.onreadystatechange;
+  }
   
 } // end function loadContent() 
 
@@ -247,8 +262,7 @@ function useNewArray(){
     })
 
   }
-  
- newArray = newArray.filter(x => x.TotalConfirmed > 50000)
+  newArray = newArray.filter(x => x.TotalConfirmed > 50000)
  newArray =  _.orderBy(newArray,x => x.TotalConfirmedPer100000(),'desc')
   
   

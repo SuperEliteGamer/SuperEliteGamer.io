@@ -273,5 +273,5 @@ function useNewArray(){
       backgroundColor: "rgba(0,0,255,0.4)"
     })
   chartData.data.labels  = newArray.map( (x) => x.Slug );
-  new Chart(ctx, chartData);
+  var myChart = new Chart(ctx, chartData); 
   }

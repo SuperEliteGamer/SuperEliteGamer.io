@@ -48,7 +48,7 @@ var chartData = {
         },
         scaleLabel: {
           display: true,
-          labelString: '1k = 1000 \n 1m = 1000000'
+          labelString: '1k = 1000 1m = 1000000'
         },
         // logarithmic scale ignores maxTicksLimit
         type: "logarithmic"

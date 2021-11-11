@@ -116,10 +116,11 @@ function loadContent() {
 
       chartData.options.title.text 
         = "Covid 19 Hotspots as of "  + dayjs().format("MMMM D, YYYY");
+	    
+    //fills array
+      useNewArray();
       myChart = new Chart(ctx, chartData); 
       
-        //fills array
-      useNewArray();
 
     } // end if
     
@@ -273,5 +274,4 @@ function useNewArray(){
       backgroundColor: "rgba(0,0,255,0.4)"
     })
   chartData.data.labels  = newArray.map( (x) => x.Slug );
-  var myChart = new Chart(ctx, chartData); 
   }

@@ -67,6 +67,7 @@ var chartData = {
 // https://www.w3schools.com/js/js_ajax_intro.asp
 
 function loadContent() {
+  document.getElementById("button").remove();
   let hasGoodData = localStorage.getItem("date") == new Date().getDate();
   
   xhttp = new XMLHttpRequest();

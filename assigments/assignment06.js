@@ -84,7 +84,7 @@ function loadDoc() {
   
   //localStorage Code
   load();  //loads data
-  document.onclose = save; //saves onclose
+  window.onbeforeunload = save;  //saves before unload
   
   
   

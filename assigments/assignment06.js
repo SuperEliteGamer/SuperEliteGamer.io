@@ -126,10 +126,6 @@ function validate(){
     }
   
   //if any loan_amt is invalid
-  if(!checkAmount($(["[id*=loan_amt]"]).val())){
-    $(this).css("background-color","red");
-    return false;
-    }
   return checkAmount($("[id*='loan_amt']").val(function(i, prevData){
     if(!checkAmount($(this).val()))
       $(this).css("background-color","red");

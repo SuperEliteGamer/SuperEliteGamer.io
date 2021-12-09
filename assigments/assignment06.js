@@ -84,7 +84,7 @@ function loadDoc() {
   
   //localStorage Code
   load();  //loads data
-  $("html").onclose = save; //saves onclose
+  document.onclose = save; //saves onclose
   
   
   

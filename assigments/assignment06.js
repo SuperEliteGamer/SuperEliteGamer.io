@@ -82,6 +82,13 @@ function loadDoc() {
     }
     });
   
+  //localStorage Code
+  load();  //loads data
+  $("html").onclose = save(); //saves onclose
+  
+  
+  
+  
 } // end: function loadDoc()
 
 
@@ -111,6 +118,13 @@ function updateLoansArray() {
     return ret;
   });
   
+  //Accured Intrest
+  $("#loan_int_accrued").html(function(){
+  let x = readNumber($("#loan_bal05").html());
+  $("[id*='loan_amt']").each(function(){ x -= readNumber($(this).val())}); //adds sum of amounts
+  x = "$" + toComma(x.toFixed(2));
+  return x;
+  })
 }
 
 function validate(){
@@ -173,4 +187,22 @@ function readNumber(value){
   value = "" + value //converts value to String
   //replaces $ or , with a nullstring globally
   return parseFloat(value.replace(/\$|,/g, ""));
+}
+
+function load(){
+  $("#loan_year01").val(localStorage.getItem("year")) //loads year
+  $("#loan_int01").val(localStorage.getItem("int"))   //loads intrest rate
+  $("[id*='loan_amt']").val(function(i){
+      return localStorage.getItem("amt" + i);
+    });
+}
+
+function save(){
+  if(validate()){
+    localStorage.setItem("year",  $("#loan_year01").val()); //stores first year
+    localStorage.setItem("int",  $("#loan_int01").val()); //stores first int
+    $("[id*='loan_amt']").each(function(i){
+      localStorage.setItem("amt" + i, $(this).val());
+    });
+  }
 }

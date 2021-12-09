@@ -74,7 +74,7 @@ function loadDoc() {
     updateLoansArray();
   });
   */
-  //updates all fields after data is updated (unfocused or user presses enter)
+  //updates all fields after data is updated (unfocused or user enters new data)
   $(".form-control").change( function() {
     //updates the array if it is valid
     if(validate()){
@@ -125,10 +125,26 @@ function validate(){
     return false;
     }
   
+  //if any loan_amt is invalid
+  if(!checkAmount($(["[id*=loan_amt]"]).val())){
+    $(this).css("background-color","red");
+    return false;
+    }
+  return checkAmount($("[id*='loan_amt']").val(function(i, prevData){
+    if(!checkAmount($(this).val()))
+      $(this).css("background-color","red");
+    return prevData;
+  }).val())
+  
+  
+  //focus it again (turns it yellow)
+  $( "*:focus" ).focus()
+  
   return true;
 }
 
 function checkYear(value){
+  value = "" + value //converts value to String
   //starts with 20 followed by followed by 1-9 then 0-9 then ends
   //2010 - 2099 inclusivley
   let regexTest =/^20[1-9][0-9]$/;
@@ -139,7 +155,18 @@ function checkInt(value){
   /*
     can start by 0 followed by . followed by atleast 1 number 0-9
   */
+  value = "" + value //converts value to String
    let regexTest =/^0?\.[0-9]+$/;
+   return regexTest.test(value)
+}
+
+function checkAmount(value){
+  value = "" + value //converts value to String
+  /*
+    atleast 1 number 0-9
+    or atleast 1 number 0-9 followed by . and two numbers 0-9
+  */
+  let regexTest =/^([0-9]+)$|(^[0-9]*\.[0-9][0-9])$/;
    return regexTest.test(value)
 }
 

@@ -76,7 +76,10 @@ function loadDoc() {
   */
   //updates all fields after data is updated (unfocused or user presses enter)
   $(".form-control").change( function() {
-    updateLoansArray();
+    //updates the array if it is valid
+    if(validate()){
+      updateLoansArray();
+    }
     });
   
 } // end: function loadDoc()
@@ -87,6 +90,7 @@ function toComma(value) {
 }
 
 function updateLoansArray() {
+  
   // update the loans array
   loans[0].loan_year = parseInt($("#loan_year01").val()); // jquery
   // update all the years in the "year" column
@@ -109,10 +113,41 @@ function updateLoansArray() {
   
 }
 
+function validate(){
+  //year
+  if(!checkYear(readNumber($("#loan_year01").val()))){
+    $("#loan_year01").css("background-color","red");
+    return false;
+    }
+  
+  if(!checkInt(readNumber($("#loan_int01").val()))){
+    $("#loan_int01").css("background-color","red");
+    return false;
+    }
+  
+  return true;
+}
+
+function checkYear(value){
+  //starts with 20 followed by followed by 1-9 then 0-9 then ends
+  //2010 - 2099 inclusivley
+  let regexTest =/^20[1-9][0-9]$/;
+  return regexTest.test(value)
+}
+
+function checkInt(value){
+  /*
+    can start by 0 followed by . followed by atleast 1 number 0-9
+  */
+   let regexTest =/^0?\.[0-9]+$/;
+   return regexTest.test(value)
+}
+
 function readNumber(value){
   /*
   removes $ and , and returns a number
   */
+  value = "" + value //converts value to String
   //replaces $ or , with a nullstring globally
   return parseFloat(value.replace(/\$|,/g, ""));
 }

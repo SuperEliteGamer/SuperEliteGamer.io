@@ -95,14 +95,24 @@ function updateLoansArray() {
     $("#loan_year0"+ (i+1) ).val(loans[i].loan_year); // jquery
   }
   
+   //updates intrest column
+   $("[id*='loan_int']").val($("#loan_int01").val());
+  
   //YE Bal
-  $("[id*='loan_bal']").html(calcIntrest(i, prevHtml));
+  $("[id*='loan_bal']").html(function(i){
+    let ret = readNumber($("#loan_amt0" + (i+1)).val());    //amount in row
+    ret += ((i > 0)? readNumber($("#loan_bal0" + i).html()): 0);  //balance of last year
+    ret += ret*readNumber($("#loan_int0" + (i+1)).val());     //year intrest
+    ret = toComma(ret.toFixed(2));
+    return ret;
+  });
+  
 }
 
-function calcIntrest(i, prevHtml){
-  let ret = $("#loan_amt0" + (i+1)).val();
-  ret += (i > 0)? $("#loan_bal0" + i).val() : 0;
-  ret = ret + ret*$("#loan_int0" + (i+1)).val();
-  //ret = toComma(ret.toFixed(2));
-  return ret;
+function readNumber(value){
+  /*
+  removes $ and , and returns a number
+  */
+  //replaces $ or , with a nullstring globally
+  return parseFloat(value.replace(/\$|,/g, ""));
 }

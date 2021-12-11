@@ -168,10 +168,11 @@ function checkYear(value){
 
 function checkInt(value){
   /*
-    can start by 0 followed by . followed by atleast 1 number 0-9
+    can start by 0 followed by . followed any number of 0-9 followed by atleast 1 nonzero followed by any number of 0-9
+    less than 1 and greater than 0
   */
   value = "" + value //converts value to String
-   let regexTest =/^0?\.[0-9]+$/;
+   let regexTest =/^0?\.[0-9]*[1-9]+[0-9]*$/;
    return regexTest.test(value)
 }
 

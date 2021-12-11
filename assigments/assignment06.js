@@ -201,11 +201,12 @@ function toMoney(value){
 
 function load(){
   if(localStorage.getItem("year") != null){
-  $("#loan_year01").val(localStorage.getItem("year")) //loads year
-  $("#loan_int01").val(localStorage.getItem("int"))   //loads intrest rate
-  $("[id*='loan_amt']").val(function(i){
+    $("#loan_year01").val(localStorage.getItem("year")) //loads year
+    $("#loan_int01").val(localStorage.getItem("int"))   //loads intrest rate
+    $("[id*='loan_amt']").val(function(i){
       return localStorage.getItem("amt" + i);
     });
+    updateLoansArray()
   }
 }
 

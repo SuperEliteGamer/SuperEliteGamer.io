@@ -87,7 +87,7 @@ function loadDoc() {
   window.onbeforeunload = save;  //saves before unload
   
   
-  
+  populate(); //loads payments
   
 } // end: function loadDoc()
 

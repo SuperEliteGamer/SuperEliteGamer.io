@@ -100,11 +100,19 @@ function updateLoansArray() {
   
   // update the loans array
   loans[0].loan_year = parseInt($("#loan_year01").val()); // jquery
+  loans[0].loan_int_rate = readNumber($("#loan_int01").val());
   // update all the years in the "year" column
   for(var i=1; i<5; i++) {
     loans[i].loan_year = loans[0].loan_year + i;
     $("#loan_year0"+ (i+1) ).val(loans[i].loan_year); // jquery
+    
+    //updates intrest
+    loans[i].loan_int_rate = loans[0].loan_int_rate;
   }
+  //updates amount in array
+  $("[id*='loan_amt']").each(function(i){
+    loans[i].loan_amount = readNumber($("#loan_amt0" + (i+1)).val())
+  })
   
    //updates intrest column
    $("[id*='loan_int']").val($("#loan_int01").val());
@@ -189,6 +197,10 @@ function readNumber(value){
   return parseFloat(value.replace(/\$|,/g, ""));
 }
 
+function toMoney(value){
+  return "$" + toComma(value.toFixed(2));
+}
+
 function load(){
   if(localStorage.getItem("year") != null){
   $("#loan_year01").val(localStorage.getItem("year")) //loads year
@@ -208,3 +220,39 @@ function save(){
     });
   }
 }
+
+// ----- ANGULAR -----
+//creates the rows relatively easily (pure js or HTML)
+var app = angular.module('myApp', []);  //creates angular module named app
+
+app.controller('myCtrl', function($scope) {   //creates app controller
+  $scope.payments = [];                       //creates array to store each payment
+  $scope.populate = function () {
+    
+    updateLoansArray();
+    
+    let total = readNumber($("#loan_bal05").html());
+    let iRate = loans[0].loan_int_rate;
+    let r = iRate / 12;
+    let n = 11;
+    //loan payment formula
+    //https://www.thebalance.com/loan-payment-calculations-315564
+    let pay = 12 * (total / ((((1+r)**(n*12))-1)/(r *(1+r)**(n*12))));  //calculates the each payment
+    for (let i = 0; i < 10; i++) {    //for each payment excluding the last one
+      total -= pay                    //subtracts payment from total
+      let int = total * (iRate);      //interest for that year
+      $scope.payments[i] = {          //place in values for each member of payments
+        "year":loans[4].loan_year + i + 1,    
+        "payment": toMoney(pay), 
+        "amt": toMoney(int),
+        "ye": toMoney(total += int)
+      }
+    }
+    $scope.payments[10] = {         //that last payment
+      "year":loans[4].loan_year + 11,
+      "payment": toMoney(total),
+      "amt": toMoney(0),
+      "ye":toMoney(0)
+    }
+  }
+});

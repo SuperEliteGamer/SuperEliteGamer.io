@@ -86,9 +86,6 @@ function loadDoc() {
   load();  //loads data
   window.onbeforeunload = save;  //saves before unload
   
-  
-  populate(); //loads payments
-  
 } // end: function loadDoc()
 
 

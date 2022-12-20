@@ -6,7 +6,7 @@ for(let x = 0; x < 9999; x++){
   
   request = new XMLHttpRequest();
   
-  let str = 'https://192.168.86.202:' + x
+  let str = '192.168.86.202:' + x
   request.open('GET', str, false);
   request.send(); // there will be a 'pause' here until the response to come.
   // the object request will be actually modified
